@@ -1,0 +1,5 @@
+<form action="/user/login" method="post">
+        login: <input type="text" name="login" /> <br>
+        pass: <input type="password" name="password" />
+        <input type="submit" value="login">
+    </form>

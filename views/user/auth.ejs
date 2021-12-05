@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <!--===============================================================================================-->
+    <!-- Montserrat Regular,Bold -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/auth/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/auth/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="/auth/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="/auth/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/auth/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/auth/css/main.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/index/css/index.css">
+    <title>Authorization</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__block ">
+                <a href="/" class="header__logo" style="font-family: Montserrat">ACTIVE-STORE.RU</a>
+            </div>
+        </header>
+        <main class="main">
+            <div class="main__wrapper">
+                <div class="limiter">
+                    <div class="container-login100">
+                        <div class="wrap-login100">
+                            <div class="login100-pic js-tilt" data-tilt>
+                                <img src="/auth/images/login.png" alt="IMG">
+                            </div>
+
+                            <form class="login100-form validate-form">
+                                <span class="login100-form-title">
+                                    Войти в аккаунт
+                                </span>
+
+                                <div class="wrap-input100 validate-input"
+                                    data-validate="Неверный Email: name@abc.xyz">
+                                    <input class="input100" type="text" name="email" placeholder="Email">
+                                    <span class="focus-input100"></span>
+                                    <span class="symbol-input100">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+
+                                <div class="wrap-input100 validate-input" data-validate="Необходимо ввести пароль">
+                                    <input class="input100" type="password" name="pass" placeholder="Пароль">
+                                    <span class="focus-input100"></span>
+                                    <span class="symbol-input100">
+                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+
+                                <div class="container-login100-form-btn">
+                                    <button class="login100-form-btn">
+                                        Вход
+                                    </button>
+                                </div>
+
+                                <div class="text-center p-t-12">
+                                    <span class="txt1">
+                                        Забыли
+                                    </span>
+                                    <a class="txt2" href="#">
+                                        логин или пароль?
+                                    </a>
+                                </div>
+
+                                <div class="text-center p-t-136">
+                                    <span class="txt1">
+                                        Нет аккаунта?
+                                    </span>
+                                    <a class="txt2" href="/user/register">
+                                        Создать аккаунт
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="footer__text">Copyright &copy; 2021, Yakel. All Rights Reserved.</div>
+        </footer>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/auth/vendor/bootstrap/js/popper.js"></script>
+    <script src="/auth/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/auth/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/auth/vendor/tilt/tilt.jquery.min.js"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="/auth/js/main.js"></script>
+</body>
+
+</html>
