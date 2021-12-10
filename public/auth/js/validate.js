@@ -36,3 +36,30 @@ $('.validate-form').validate({
             }, 8000);
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector(".validate-form");
+    form.addEventListener('submit', formSend);
+
+    async function formSend(e) {
+        e.preventDefault();
+        let error = formValidate(form);
+    }
+
+    function formValidate (form) {
+        var checkbox = document.getElementById("formAgreement");
+        formRemoveError(checkbox);
+        if (checkbox.getAttribute("type") === "checkbox" && checkbox.checked === false) {
+            formAddError(checkbox);
+        }
+    }
+
+    function formAddError(input) {
+        input.parentElement.classList.add('alert-validate');
+        input.parentElement.setAttribute("data-validate", "галочку поставь гнида");
+    }
+
+    function formRemoveError(input) {
+        input.parentElement.classList.remove('alert-validate');
+    }
+})

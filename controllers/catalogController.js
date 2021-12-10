@@ -1,4 +1,4 @@
-const model = require('../models/catalogModel');
+const model = require('../models/Catalog');
 
 // catalog/
 exports.index_get = function(req,res) {
