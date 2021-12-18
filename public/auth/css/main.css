@@ -193,8 +193,11 @@ iframe {
   align-items: center;
   cursor: pointer;
 }
+:root {
+  --color: #505050;
+}
 .checkbox__label::before {
-  box-shadow: 0 0.0325em 0.15em rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0.0325em 0.15em var(--color);
   content: "";
   margin-right: 10px;
   flex: 0 0 15px;

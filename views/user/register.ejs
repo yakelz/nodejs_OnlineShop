@@ -3,76 +3,68 @@
 
 <head>
     <meta charset="UTF-8">
-    <!--===============================================================================================-->
     <!-- Montserrat Regular,Bold -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     <!-- Icons -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/auth/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/auth/vendor/animate/animate.css">
     <link rel="stylesheet" type="text/css" href="/auth/vendor/css-hamburgers/hamburgers.min.css">
     <link rel="stylesheet" type="text/css" href="/auth/vendor/select2/select2.min.css">
-    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/auth/css/util.css">
     <link rel="stylesheet" type="text/css" href="/auth/css/main.css">
-    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/index/css/index.css">
     <title>Authorization</title>
 </head>
 
 <body>
     <div class="wrapper">
-        <header class="header">
-            <div class="header__block ">
-                <a href="/" class="header__logo" style="font-family: Montserrat">ACTIVE-STORE.RU</a>
-            </div>
-        </header>
+        <%- include ("../partials/header.ejs")  %>
         <main class="main">
             <div class="main__wrapper">
                 <div class="limiter">
                     <div class="container-login100">
                         <div class="wrap-login100">
 
-                            <form class="login100-form validate-form">
+                            <form class="login100-form validate-form" method="post">
                                 <span class="login100-form-title">
                                     Регистрация
                                 </span>
 
-                                <div class="wrap-input100 ">
-                                    <input class="input100" type="text" name="name" placeholder="Имя пользователя">
+                                <div class="wrap-input100 validate-input">
+                                    <input class="input100" type="text" name="name" id="register-username" placeholder="Имя пользователя">
                                     <span class="focus-input100"></span>
                                     <span class="symbol-input100">
                                         <i class="fa fa-user" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <div class="wrap-input100 validate-input" data-validate="Неверный Email: name@abc.xyz">
-                                    <input class="input100" type="email" name="email" placeholder="Email">
+
+                                <div class="wrap-input100 validate-input" data-validate="">
+                                    <input class="input100" type="email" name="email" id="register-email" placeholder="Email">
                                     <span class="focus-input100"></span>
                                     <span class="symbol-input100">
                                         <i class="fa fa-envelope" aria-hidden="true"></i>
                                     </span>
                                 </div>
 
-                                <div class="wrap-input100 validate-input" data-validate="Необходимо ввести пароль">
-                                    <input class="input100" type="password" name="password" placeholder="Пароль">
+                                <div class="wrap-input100 validate-input" data-validate="">
+                                    <input class="input100" type="password" name="password" id="register-password" placeholder="Пароль">
                                     <span class="focus-input100"></span>
                                     <span class="symbol-input100">
                                         <i class="fa fa-lock" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <div class="privacy-policy">
+
+                                <div class="privacy-policy validate-input">
                                     <input id="formAgreement" class="checkbox__input" type="checkbox" name="agree">
                                     <label for="formAgreement" class="checkbox__label"><span>Я согласен <a
                                                 href="/about/privacy" target="_blank">с пользовательским
                                                 соглашением</a></span></label>
-
                                 </div>
 
                                 <div class="container-login100-form-btn">
-                                    <button class="login100-form-btn">
+                                    <button type="button" class="login100-form-btn register-button">
                                         Создать аккаунт
                                     </button>
                                 </div>
@@ -95,13 +87,10 @@
                 </div>
             </div>
         </main>
-        <footer class="footer">
-            <div class="footer__text">Copyright &copy; 2021, Yakel. All Rights Reserved.</div>
-        </footer>
+        <%- include ("../partials/footer.ejs")  %>
     </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <!--===============================================================================================-->
     <script src="/auth/vendor/bootstrap/js/popper.js"></script>
     <script src="/auth/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -115,7 +104,7 @@
         })
     </script>
     <!--===============================================================================================-->
-    <script src="/auth/js/validate.js"></script>
+    <script src="/auth/js/register.js"></script>
 </body>
 
 </html>

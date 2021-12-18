@@ -45,7 +45,10 @@ const generateAccessToken = (id, email,roles) => {
 }
 
 class userController {
-    async registration(req, res) {
+    async registration_get (req,res) {
+        res.render ('../views/user/register');
+    }
+    async registration_post(req, res) {
         try {
             const errors = validationResult(req);
             if(!errors.isEmpty()) {
@@ -66,23 +69,27 @@ class userController {
             res.status(400).json({message: 'Registration error'});
         }
     }
-    async login (req, res) {
+    async login_get (req,res) {
+        res.render ('../views/user/auth');
+    }
+    async login_post (req, res) {
         try {
-            const {email, password} = req.body;
+            const {email,password} = req.body;
+
             const user = await User.findOne({email});
             if (!user) {
-                return res.status(400).json({message: `Неправильно набран логин или пароль`});
+                return res.status(400).json({message: `Неправильно набран !логин или пароль`});
             }
             const validPassword = bcrypt.compareSync(password, user.password);
             if (!validPassword) {
-                return res.status(400).json({message: `Неправильно набран логин или пароль`});
+                return res.status(400).json({message: `Неправильно набран логин или !пароль`});
             }
             const token = generateAccessToken(user._id, user.email, user.roles)
-            return res.json({token});
+            return res.status(200).json({token});
 
         } catch (e) {
             console.log(e);
-            res.status(400).json({message: 'Login error'});
+            return res.status(400).json({message: 'Login error'});
         }
     }
     async getUsers(req, res) {
