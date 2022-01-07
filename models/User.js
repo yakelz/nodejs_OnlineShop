@@ -14,10 +14,15 @@ const User = new Schema ({
         type: String,
         required: true,
     },
+    created: {
+        type: Date,
+        default: Date.now
+    },
     roles: [{
         type: String,
         ref: 'Role'
     }]
 });
+
 
 module.exports = model ('User', User)

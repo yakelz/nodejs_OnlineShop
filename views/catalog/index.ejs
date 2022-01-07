@@ -30,6 +30,7 @@
                         <li><a href="#" class="header__link orders">Заказы</a></li>
                         <li><a href="#" class="header__link favorites">Избранное</a></li>
                         <li><a href="/user/login" class="header__link profile">Войти</a></li>
+
                     </ul>
                 </nav>
                 <div class="header__burger">
@@ -39,24 +40,8 @@
         </header>
         <main class="main">
             <div class="main__wrapper">
-                <div class="categories">
-                    <div class="categories_block-left">
-                        <div class="categories__item yellow">
-                            <p>Трудимся, ради вашего комфорта</p>
-                            <img src="" alt="">
-                        </div>
-                    </div>
-                    <div class="categories_block-right">
-                        <div class="categories__row">
-                            <div class="categories__item green"></div>
-                            <div class="categories__item purpule"></div>
-                        </div>
-                        <div class="categories__row">
-                            <div class="categories__item red"></div>
-                            <div class="categories__item blue"></div>
-                        </div>
-                    </div>
-                </div>
+
+                <%- include ("../partials/categories.ejs") %>
 
                 <div class="catalog">
                     <aside class="sidebar">

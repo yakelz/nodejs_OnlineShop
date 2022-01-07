@@ -58,15 +58,18 @@ class userController {
             const condidate = await User.findOne({email});
             if (condidate) {
                 return res.status(400).json({message: 'Пользователь с таким Email уже существует'});
+                // return res.status(400).render('../views/user/register', {
+                //     errorMessage: 'Пользователь с таким Email уже существует',
+                // });
             }
             const hashPassword = bcrypt.hashSync (password, 7);
             const userRole = await Role.findOne({value:"USER"});
             const user = new User ({username, email,password: hashPassword, roles:[userRole.value]});
             await user.save();
-            return res.json({message:"Регистрация прошла успешно!"});
+            return res.status(200).json({message: 'Регистрация прошла успешно!'});
         } catch (e) {
             console.log(e);
-            res.status(400).json({message: 'Registration error'});
+            return res.status(400).json({message: 'Registration error'});
         }
     }
     async login_get (req,res) {
@@ -78,13 +81,14 @@ class userController {
 
             const user = await User.findOne({email});
             if (!user) {
-                return res.status(400).json({message: `Неправильно набран !логин или пароль`});
+                return res.status(400).json({message: `Неправильно набран логин или пароль`});
             }
             const validPassword = bcrypt.compareSync(password, user.password);
             if (!validPassword) {
-                return res.status(400).json({message: `Неправильно набран логин или !пароль`});
+                return res.status(400).json({message: `Неправильно набран логин или пароль`});
             }
-            const token = generateAccessToken(user._id, user.email, user.roles)
+            const token = generateAccessToken(user._id, user.email, user.roles);
+            // res.cookie('jwt',token, { httpOnly: true, secure: true, maxAge: 3600000 });
             return res.status(200).json({token});
 
         } catch (e) {

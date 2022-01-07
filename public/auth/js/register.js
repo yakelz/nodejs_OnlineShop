@@ -1,6 +1,7 @@
 var input = $('.validate-input .input100');
 
-$('.register-button').on('click', function () {
+$('.register-button').on('click', function ( event ) {
+    event.preventDefault();
     var check = true;
     for (var i = 0; i < input.length; i++) {
         if (register(input[i]) == false) {
@@ -15,7 +16,8 @@ $('.register-button').on('click', function () {
     }
     if (check == false) {
         return;
-    } else {
+    }
+    else {
         var data = {
             username: $('#register-username').val(),
             email: $('#register-email').val(),
@@ -28,13 +30,21 @@ $('.register-button').on('click', function () {
             url: '/user/register',
             statusCode: {
                 200: function() {
-                    window.location.href = "/";
+                    // console.log(jqXHR)
+                    // const error = JSON.parse(jqXHR);
+                    $('.error').remove();
+                    $('.container-login100-form-btn').before($('<div>', {class: 'success', 'text':'Регистрация прошла успешно!'}));
+                    setTimeout(() => {
+                        $('.success').remove();
+                        window.location.href = "/user/login";
+                    }, 2500);
                 },
                 400: function(jqXHR) {
-                    var error = JSON.parse(jqXHR.responseText);
-                    console.log(error.message);
+                    const error = JSON.parse(jqXHR.responseText);
                     console.log(error);
-                    // $('.error',form).html(error.message);
+                    $('.error').remove();
+                    $('.container-login100-form-btn').before($('<div>', {class: 'error', 'text':error.message}));
+                    // $('.login100-form-title').parent().append($('<div>', {'text':error.message}));
                 }
             }
         });

@@ -1,6 +1,7 @@
 var input = $('.validate-input .input100');
 
-$('.login-button').on('click', function () {
+$('.login-button').on('click', function (event) {
+    event.preventDefault();
     var check = true;
     for (var i = 0; i < input.length; i++) {
         if (validate(input[i]) == false) {
@@ -21,12 +22,18 @@ $('.login-button').on('click', function () {
             url: '/user/login',
             statusCode: {
                 200: function() {
-                    window.location.href = "/";
+                    $('.error').remove();
+                    $('.container-login100-form-btn').before($('<div>', {class: 'success', 'text':'Вход выполнен успешно!'}));
+                    setTimeout(() => {
+                        $('.success').remove();
+                        window.location.href = "/";
+                    }, 2500);
                 },
                 400: function(jqXHR) {
-                    var error = JSON.parse(jqXHR.responseText);
-                    console.log(error.message);
-                    $('.error',form).html(error.message);
+                    const error = JSON.parse(jqXHR.responseText);
+                    console.log(error);
+                    $('.error').remove();
+                    $('.container-login100-form-btn').before($('<div>', {class: 'error', 'text':error.message}));
                 }
             }
         });

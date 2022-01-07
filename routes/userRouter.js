@@ -14,7 +14,7 @@ router.post ('/register',[
 
 router.post ('/login', userController.login_post);
 router.get ('/login', userController.login_get);
-// router.get ('/logout', userController.logout_get);
+
 // router.post ('/logout', userController.logout_post);
 
 router.get('/users', authMiddleware, roleMiddleware('ADMIN'), userController.getUsers)
