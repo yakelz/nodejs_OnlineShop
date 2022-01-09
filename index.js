@@ -16,6 +16,10 @@ app.use(session({
   secret: 'randomstring',
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 2, //2hours
+    // secure: true
+  },
   store: new MongoDBStore({ uri: config.get('mongoURL'), collection: 'sessions' })
 }));
 

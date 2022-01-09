@@ -77,7 +77,7 @@ button {
     margin: 0px 48px;
 }
 
-.header__catalog {
+.header__admin {
     display: flex;
     align-items: center;
     background-color: #faf6f6;
@@ -85,7 +85,7 @@ button {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.header__catalog-button {
+.header__admin-button {
     padding: 0 15px;
     font-size: 15px;
     color: black;
@@ -93,11 +93,11 @@ button {
     opacity: 1;
 }
 
-.header__catalog-button:hover {
+.header__admin-button:hover {
     opacity: 0.6;
 }
 
-.header__catalog .header__catalog-button::before {
+.header__admin .header__admin-button::before {
     content: "\f0c9";
     font-family: FontAwesome;
     padding-right: 15px;
@@ -120,6 +120,9 @@ button {
     outline: none;
     background: white;
 }
+.header__search input:focus {
+    background: #f8f8f8;
+}
 .header__search button {
     position: absolute;
     width: 42px;
@@ -135,7 +138,8 @@ button {
 }
 .header__menu {
     display: flex;
-    flex-grow:1;
+    justify-content: flex-start;
+    /*flex-grow:1;*/
     z-index: 0;
 }
 .header__list {
@@ -146,7 +150,7 @@ button {
 .header__link {
     color: black;
     padding: 0px 20px;
-    font-size: 18px;
+    font-size: 21px;
     transition: opacity 0.2s ease-out;
     opacity: 1;
 }

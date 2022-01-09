@@ -1,4 +1,3 @@
-!
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -16,11 +15,7 @@
 
 <body>
     <div class="wrapper">
-        <header class="header">
-            <div class="header__block ">
-                <a href="/" class="header__logo">ACTIVE-STORE.RU</a>
-            </div>
-        </header>
+        <%- include ("../partials/header.ejs")  %>
         <main class="main">
             <div class="main__wrapper">
                 <h1>Политика обработки персональных данных</h1>
@@ -142,9 +137,7 @@
 
             </div>
         </main>
-        <footer class="footer">
-            <div class="footer__text">Copyright &copy; 2021, Yakel. All Rights Reserved.</div>
-        </footer>
+        <%- include ("../partials/footer.ejs") %>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>

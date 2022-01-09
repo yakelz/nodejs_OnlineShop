@@ -1,5 +1,5 @@
 var arr = [];
-for (var i = 0; i < 100; i++) {
+for (var i = 0; i < 1; i++) {
     arr.push({
         name: "item item itemitem item item" + i,
         cost: (i + 1) * 10,

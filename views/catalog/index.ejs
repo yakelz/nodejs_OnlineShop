@@ -17,32 +17,21 @@
         <header class="header">
             <div class="header__block ">
                 <a href="/" class="header__logo">ACTIVE-STORE.RU</a>
-                <div class="header__catalog">
-                    <a href="" class="header__catalog-button">Каталог</a>
-                </div>
+                <% if (isAdmin) {%>
+                    <div class="header__admin">
+                        <a href="/admin" class="header__admin-button">Администрирование</a>
+                    </div>
+                <% }%>
                 <form action="#" method="get" class="header__search">
                     <input placeholder="Поиск" type="header__search-text">
                     <button type="submit"></button>
                 </form>
-                <nav class="header__menu">
-                    <ul class="header__list">
-                        <li><a href="#" class="header__link cart">Корзина</a></li>
-                        <li><a href="#" class="header__link orders">Заказы</a></li>
-                        <li><a href="#" class="header__link favorites">Избранное</a></li>
-                        <li><a href="/user/login" class="header__link profile">Войти</a></li>
-
-                    </ul>
-                </nav>
-                <div class="header__burger">
-                    <span></span>
-                </div>
+                <%- include ("../partials/navigation.ejs") %>
             </div>
         </header>
         <main class="main">
             <div class="main__wrapper">
-
-                <%- include ("../partials/categories.ejs") %>
-
+<!--            <%- include ("../partials/categories.ejs") %>-->
                 <div class="catalog">
                     <aside class="sidebar">
                         <nav class="sidebar__catalog">

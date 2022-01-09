@@ -1,33 +1,3 @@
-// exports.register_get = function(req,res) {
-//     // res.send ('register page' + '<br>' +
-//     // 'method:' + req.method)
-//     res.render ('../views/user/register')
-// };
-// exports.register_post = function(req,res) {
-//     res.send ('register page' + '<br>' +
-//     'method:' + req.method)
-// };
-
-// exports.login_get = function(req,res) {
-//     // res.send ('login page' + '<br>' +
-//     // 'method:' + req.method)
-//     res.render ('../views/user/auth')
-// };
-// exports.login_post = function(req,res) {
-//     res.send ('login page' + '<br>' +
-//     'method:' + req.method)
-// };
-
-// exports.logout_get = function(req,res) {
-//     res.send ('logout page' + '<br>' +
-//     'method:' + req.method)
-// };
-
-// exports.logout_post = function(req,res) {
-//     res.send ('logout page' + '<br>' +
-//     'method:' + req.method)
-// };
-
 const {secretKey} = require('config')
 const User = require('../models/User');
 const Role = require('../models/Role');
@@ -58,9 +28,6 @@ class userController {
             const condidate = await User.findOne({email});
             if (condidate) {
                 return res.status(400).json({message: 'Пользователь с таким Email уже существует'});
-                // return res.status(400).render('../views/user/register', {
-                //     errorMessage: 'Пользователь с таким Email уже существует',
-                // });
             }
             const hashPassword = bcrypt.hashSync (password, 7);
             const userRole = await Role.findOne({value:"USER"});
@@ -73,6 +40,7 @@ class userController {
         }
     }
     async login_get (req,res) {
+        console.log(req.session);
         res.render ('../views/user/auth');
     }
     async login_post (req, res) {
@@ -88,7 +56,12 @@ class userController {
                 return res.status(400).json({message: `Неправильно набран логин или пароль`});
             }
             const token = generateAccessToken(user._id, user.email, user.roles);
-            // res.cookie('jwt',token, { httpOnly: true, secure: true, maxAge: 3600000 });
+            req.session.userToken = token;
+            req.session.isLogin = true;
+            if (user.roles.includes('ADMIN')) {
+                req.session.isAdmin = true;
+            }
+            console.log(req.session)
             return res.status(200).json({token});
 
         } catch (e) {
@@ -103,6 +76,14 @@ class userController {
         } catch (e) {
             
         }
+    }
+
+    async logout_get(req, res) {
+        req.session.destroy(err => {
+            if (err) console.log(err);
+            res.redirect('/');
+        });
+
     }
 }
 

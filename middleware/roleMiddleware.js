@@ -7,7 +7,8 @@ module.exports = function(roles) {
             next();
         }
         try {
-            const token = req.headers.authorization.split(' ')[1] // Bearer asfasnfkajsfnjk
+            // const token = req.headers.authorization.split(' ')[1] // Bearer asfasnfkajsfnjk
+            const token = req.session.userToken;
             if (!token) {
                 return res.status(401).json({message: "Пользователь не авторизован"});
             }
