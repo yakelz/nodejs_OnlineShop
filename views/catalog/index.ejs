@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/index/css/index.css">
     <!-- icons -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- main font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,8 +18,8 @@
             <div class="header__block ">
                 <a href="/" class="header__logo">ACTIVE-STORE.RU</a>
                 <% if (isAdmin) {%>
-                    <div class="header__admin">
-                        <a href="/admin" class="header__admin-button">Администрирование</a>
+                    <div class="header__catalog">
+                        <a href="/admin/products" class="header__catalog-button">Администрирование</a>
                     </div>
                 <% }%>
                 <form action="#" method="get" class="header__search">
@@ -51,17 +51,21 @@
                     <section class="content__products products">
                         <h2 class="products__title">Товары</h2>
                         <div class="products__items">
-                            <% for(var i=0; i<items.length;i++) {%>
+                            <% products.forEach(function(product){ %>
                                 <div class="product__item">
-                                    <div class="product__image"></div>
-                                    <div class="product__price"><%=items[i].cost %> P</div>
-                                    <div class="product__name"><%=items[i].name %></div>
+                                        <% if (product.image == "") { %>
+                                            <img class="product__image" id="noimage" src="/images/noimage.png">
+                                        <% } else {%>
+                                            <img class="product__image" id="noimage" src="/product_images/<%= product._id %>/<%= product.image %>">
+                                        <% }%>
+                                    <div class="product__price"><%= product.price %> P</div>
+                                    <div class="product__name"><%= product.title %></div>
                                     <div class="product__buttons">
                                         <a href="" class="product__button cart">В корзину</a>
                                         <a href="" class="product__button favorites"></a>
                                     </div>
                                 </div>
-                            <%} %>
+                            <% }); %>
  
                         </div>
                     </section>

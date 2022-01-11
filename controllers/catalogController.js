@@ -1,11 +1,14 @@
 const model = require('../models/Catalog');
+const Product = require("../models/Product");
 // catalog/
 exports.index_get = function(req,res) {
     // const user = users.find(user => user._id === req.session.userId);
-    res.render('../views/catalog/index', {
-        items: model.getItems(),
-        isLogin: req.session.isLogin,
-        isAdmin: req.session.isAdmin
+    Product.find(function (error, products) {
+        res.render('../views/catalog/index', {
+            products: products,
+            isLogin: req.session.isLogin,
+            isAdmin: req.session.isAdmin
+        });
     });
     // res.send ('index_get' + '<br>'+ 
     // 'method: '+ req.method + '<br>'+ 

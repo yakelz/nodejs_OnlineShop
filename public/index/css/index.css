@@ -77,7 +77,7 @@ button {
     margin: 0px 48px;
 }
 
-.header__admin {
+.header__catalog {
     display: flex;
     align-items: center;
     background-color: #faf6f6;
@@ -85,7 +85,7 @@ button {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.header__admin-button {
+.header__catalog-button {
     padding: 0 15px;
     font-size: 15px;
     color: black;
@@ -93,11 +93,11 @@ button {
     opacity: 1;
 }
 
-.header__admin-button:hover {
+.header__catalog-button:hover {
     opacity: 0.6;
 }
 
-.header__admin .header__admin-button::before {
+.header__catalog .header__catalog-button::before {
     content: "\f0c9";
     font-family: FontAwesome;
     padding-right: 15px;
