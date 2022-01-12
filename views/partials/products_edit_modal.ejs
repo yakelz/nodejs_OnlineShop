@@ -1,0 +1,46 @@
+<!-- The Modal -->
+<div id="myModal" class="modal" style="display:block;">
+    <div class="modal-content">
+        <span class="close"></span>
+        <h2 class="modal__title">Изменить товар</h2>
+
+        <!--add product form-->
+        <form class="modal__form" method="post" enctype="multipart/form-data" action="/admin/products/edit/<%=product._id%>/">
+
+            <div class="form-group">
+                <label for="">Имя продукта</label>
+                <input type="text" name="title" placeholder="Введите имя" value="<%=product.title%>">
+            </div>
+
+            <div class="form-group">
+                <label for="">Описание продукта</label>
+                <textarea name="description" cols="20" rows="4" placeholder="Введите описание продукта"><%=product.description%></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="">Категория</label>
+                <select name="category">
+                    <% categories.forEach(function(category){ %>
+                        <option value="<%= category.link %>"
+                            <% if (category.link == product.category) { %>
+                                selected="selected" <% } %>
+                        ><%= category.title %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="">Цена</label>
+                <input type="text" name="price" placeholder="Введите цену" value="<%=product.price%>">
+            </div>
+
+            <div class="form-group">
+                <label for="">Image</label>
+                <input type="file" class="image__input" name="image" id="img_edit">
+                <img class="image__preview" src="/product_images/<%= product._id %>/<%= product.image %>" id="imgPreview_edit" alt="">
+            </div>
+
+            <button>Изменить</button>
+        </form>
+    </div>
+</div>

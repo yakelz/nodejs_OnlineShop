@@ -2,10 +2,11 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const config = require('config');
-const session = require('express-session');
 const flash = require('connect-flash');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const fileUpload = require('express-fileupload');
+const messages = require('express-messages');
 
 const MongoDBStore = require('connect-mongodb-session')(session);
 const PORT = config.get('port') || 5000;
@@ -33,8 +34,12 @@ app.use(session({
   store: new MongoDBStore({ uri: config.get('mongoURL'), collection: 'sessions' })
 }));
 
-
+//Express Messages middleware
 app.use(flash());
+app.use(function (req, res, next) {
+  res.locals.messages = messages(req, res);
+  next();
+});
 
 app.use(express.json());
 app.use(express.static('public'));

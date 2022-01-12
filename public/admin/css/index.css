@@ -167,7 +167,7 @@
     background-color: #fefefe;
     margin: auto;
     width: 425px;
-    height: 704px;
+    max-height: 704px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -250,8 +250,13 @@
     margin-top: 10px;
     object-fit: cover;
 }
+.image__preview {
+    width: 100px;
+    height: 100px;
+}
 
 #noimage {
+    background-color: #868686;
     object-fit: cover;
     width: 80px;
     height: 80px;

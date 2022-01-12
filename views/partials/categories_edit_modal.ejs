@@ -1,0 +1,18 @@
+<!-- The Modal -->
+<div id="myModal" class="modal" style="display:block;">
+    <div class="modal-content">
+        <span class="close"></span>
+        <h2 class="modal__title">Изменить категорию</h2>
+
+        <!--add product form-->
+        <form class="modal__form" method="post" action="/admin/categories/edit/<%=category._id %>" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="">Имя категории</label>
+                <input type="text" name="title" placeholder="Введите имя" value="<%=category.title%>">
+            </div>
+
+            <button>Изменить</button>
+        </form>
+    </div>
+</div>

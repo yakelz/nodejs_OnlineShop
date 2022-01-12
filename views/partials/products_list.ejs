@@ -1,0 +1,31 @@
+<!-- products list -->
+<table class="content-table">
+    <thead>
+    <tr class="home">
+        <th>Имя продукта</th>
+        <th>Цена</th>
+        <th>Категория</th>
+        <th>Изображение товара</th>
+        <th>Изменить</th>
+        <th>Удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% products.forEach(function(product){ %>
+        <tr>
+            <td><%= product.title %></td>
+            <td><%= product.price %> Р</td>
+            <td><%= product.category %></td>
+            <td>
+                <% if (product.image == "") { %>
+                    <img id="noimage" src="/noimage.png">
+                <% } else {%>
+                    <img id="noimage" src="/product_images/<%= product._id %>/<%= product.image %>">
+                <% }%>
+            </td>
+            <td><a href="/admin/products/edit/<%= product._id %>">Edit</a></td>
+            <td><a class="confirmDeletion" href="/admin/products/delete/<%= product._id %>">Delete</a></td>
+        </tr>
+    <% }); %>
+    </tbody>
+</table>

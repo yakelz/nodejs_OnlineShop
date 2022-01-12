@@ -579,7 +579,7 @@ button {
     width: 100%;
     height: 400px;
     object-fit: cover;
-    background-color: lightskyblue;
+    background-color: #868686;
 }
 .product__price {
     font-size: 24px;

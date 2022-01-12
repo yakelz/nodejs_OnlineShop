@@ -1,0 +1,16 @@
+<% Object.keys(messages).forEach(function (type) { %>
+    <div class="alert alert-<%= type %>">
+        <% messages[type].forEach(function (message) { %>
+            <%= message %>
+        <% }) %>
+        <button type="button" name="close" onclick="close_alert()"></button>
+    </div>
+<% }) %>
+
+<% if (errors) {%>
+    <% errors.forEach(function(error) { %>
+        <div class="alert alert-danger">
+            <%= error.msg %>
+        </div>
+    <% });%>
+<% }%>

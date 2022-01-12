@@ -1,0 +1,19 @@
+<!-- products list -->
+<table class="content-table">
+    <thead>
+    <tr class="home">
+        <th>Имя категории</th>
+        <th>Изменить</th>
+        <th>Удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% categories.forEach(function(category){ %>
+        <tr>
+            <td><%= category.title %></td>
+            <td><a href="/admin/categories/edit/<%= category._id %>">Edit</a></td>
+            <td><a class="confirmDeletion" href="/admin/categories/delete/<%= category._id %>">Delete</a></td>
+        </tr>
+    <% }); %>
+    </tbody>
+</table>

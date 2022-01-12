@@ -16,12 +16,29 @@ span.onclick = function() {
     modal.style.display = "none";
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+// // When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// }
+
+$(window).click(function(e) {
+    if (e.target.id == 'myModal') {
+        $(".modal").attr("style","display:none;")
     }
-}
+});
+
+//delete confirm
+$('a.confirmDeletion').on('click', function () {
+    if (!confirm('Удалить?'))
+        return false;
+});
+$('a.header__link').on('click', function () {
+    if (!confirm('Выйти из аккаунта?'))
+        return false;
+});
+
 // image preview
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -29,6 +46,7 @@ function readURL(input) {
 
         reader.onload = function(e) {
             $("#imgPreview").attr('src', e.target.result).width(100).height(100);
+            $("#imgPreview_edit").attr('src', e.target.result).width(100).height(100);
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -36,5 +54,8 @@ function readURL(input) {
 }
 
 $("#img").change(function() {
+    readURL(this);
+});
+$("#img_edit").change(function() {
     readURL(this);
 });

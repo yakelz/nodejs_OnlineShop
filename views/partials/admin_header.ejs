@@ -1,0 +1,24 @@
+<header class="header">
+    <div class="header__block ">
+        <a href="/" class="header__logo">ACTIVE-STORE.RU</a>
+        <div class="header__catalog">
+            <a href="/" class="header__catalog-button">Каталог</a>
+        </div>
+        <form action="#" method="get" class="header__search">
+            <input placeholder="Поиск" type="header__search-text">
+            <button type="submit"></button>
+        </form>
+        <nav class="header__menu">
+            <ul class="header__list">
+                <li class="header__admin">
+                    <a href="/user/logout" class="header__link profile"></a>
+                    <div class="header__admin-name">
+                        <%= admin_name %>
+                        <br>
+                        <div class="header__admin-email"><%= admin_email %></div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

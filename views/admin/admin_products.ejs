@@ -1,0 +1,50 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/index/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/admin/css/index.css">
+    <!-- icons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- main font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminPanel</title>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <%-include ("../partials/admin_header.ejs")%>
+        <main class="main">
+            <div class="main__wrapper">
+                <div class="main__sidebar">
+                    <a class="option active" href="/admin/products">
+                        <div class="add__product">Добавить продукт</div>
+                    </a>
+                    <a class="option" href="/admin/categories">
+                        <div class="add__category">Добавить категорию</div>
+                    </a>
+                </div>
+                <div class="main__content">
+                    <h1>Список товаров</h1>
+                    <button id="myBtn" class="add__product-button">Добавить товар</button>
+
+
+
+                    <%- include ("../partials/products_create_modal.ejs")  %>
+
+                    <%- include ("../partials/products_list.ejs")  %>
+
+                    <% if (edit) {%>
+                        <%-include ("../partials/products_edit_modal.ejs")%>
+                    <% }; %>
+
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/admin/js/modal.js"></script>
+
+</body>
+
+<%- include ("../partials/footer.ejs")  %>

@@ -1,0 +1,43 @@
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close"></span>
+        <h2 class="modal__title">Добавить товар</h2>
+
+        <!--add product form-->
+        <form class="modal__form" method="post" action="/admin/products/create" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="">Имя продукта</label>
+                <input type="text" name="title" placeholder="Введите имя">
+            </div>
+
+            <div class="form-group">
+                <label for="">Описание продукта</label>
+                <textarea name="description" cols="20" rows="4" placeholder="Введите описание продукта"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="">Категория</label>
+                <select name="category">
+                    <% categories.forEach(function(category){ %>
+                        <option value="<%= category.link %>"><%= category.title %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="">Цена</label>
+                <input type="text" name="price" placeholder="Введите цену">
+            </div>
+
+            <div class="form-group">
+                <label for="">Image</label>
+                <input type="file" class="image__input" name="image" id="img">
+                <img src="#" id="imgPreview" alt="">
+            </div>
+
+            <button>Добавить</button>
+        </form>
+    </div>
+</div>

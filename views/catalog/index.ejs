@@ -37,14 +37,10 @@
                         <nav class="sidebar__catalog">
                             <ul class="sidebar__list">
                                 <h2>Каталог</h2>
-                                <li><a href="" class="sidebar__item">Электроника</a></li>
-                                <li><a href="" class="sidebar__item">Одежда</a></li>
-                                <li><a href="" class="sidebar__item">Обувь</a></li>
-                                <li><a href="" class="sidebar__item">Для дома</a></li>
-                                <li><a href="" class="sidebar__item">Спорт</a></li>
-                                <li><a href="" class="sidebar__item">Строительство</a></li>
-                                <li><a href="" class="sidebar__item">Книги</a></li>
-                                <li><a href="" class="sidebar__item">Автотовары</a></li>
+                                <li><a href="/" class="sidebar__item">Все товары</a></li>
+                                <% categories.forEach(function(category){ %>
+                                    <li><a href="/products/<%= category.link %>" class="sidebar__item"><%= category.title %></a></li>
+                                <% }); %>
                             </ul>
                         </nav>
                     </aside>
@@ -54,7 +50,7 @@
                             <% products.forEach(function(product){ %>
                                 <div class="product__item">
                                         <% if (product.image == "") { %>
-                                            <img class="product__image" id="noimage" src="/images/noimage.png">
+                                            <img class="product__image" id="noimage" src="/noimage.png">
                                         <% } else {%>
                                             <img class="product__image" id="noimage" src="/product_images/<%= product._id %>/<%= product.image %>">
                                         <% }%>
