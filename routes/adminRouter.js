@@ -24,14 +24,14 @@ router.get('/products',authMiddleware, roleMiddleware('ADMIN'), productsControll
 router.post('/products/create',[
     check('title', "Имя продукта не может быть пустым").notEmpty(),
     check('description', "Описание не может быть пустым").notEmpty(),
-    check('price', "Неправильно введена цена").isFloat()
+    check('price', "Неправильно введена цена").notEmpty().isFloat({ min:0})
 ],productsController.create_post);
 
 router.get('/products/edit/:id',authMiddleware, roleMiddleware('ADMIN'),productsController.edit_get);
 router.post('/products/edit/:id',[
     check('title', "Имя продукта не может быть пустым").notEmpty(),
     check('description', "Описание не может быть пустым").notEmpty(),
-    check('price', "Неправильно введена цена").isFloat()
+    check('price', "Неправильно введена цена").notEmpty().isFloat({ min:0})
 ],productsController.edit_post);
 
 router.get('/products/delete/:id',authMiddleware, roleMiddleware('ADMIN'), productsController.delete_get);

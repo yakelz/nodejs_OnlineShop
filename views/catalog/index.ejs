@@ -22,10 +22,7 @@
                         <a href="/admin/products" class="header__catalog-button">Администрирование</a>
                     </div>
                 <% }%>
-                <form action="#" method="get" class="header__search">
-                    <input placeholder="Поиск" type="header__search-text">
-                    <button type="submit"></button>
-                </form>
+                <%- include ("../partials/search.ejs") %>
                 <%- include ("../partials/navigation.ejs") %>
             </div>
         </header>
@@ -47,21 +44,25 @@
                     <section class="content__products products">
                         <h2 class="products__title">Товары</h2>
                         <div class="products__items">
-                            <% products.forEach(function(product){ %>
-                                <div class="product__item">
-                                        <% if (product.image == "") { %>
-                                            <img class="product__image" id="noimage" src="/noimage.png">
-                                        <% } else {%>
-                                            <img class="product__image" id="noimage" src="/product_images/<%= product._id %>/<%= product.image %>">
-                                        <% }%>
-                                    <div class="product__price"><%= product.price %> P</div>
-                                    <div class="product__name"><%= product.title %></div>
-                                    <div class="product__buttons">
-                                        <a href="" class="product__button cart">В корзину</a>
-                                        <a href="" class="product__button favorites"></a>
+                            <% if (products == "") {%>
+                                <img class="no-products" src="/noproducts.png" alt="no-products">
+                            <%} else {
+                                products.forEach(function(product){ %>
+                                    <div class="product__item">
+                                            <% if (product.image == "") { %>
+                                                <img class="product__image" id="noimage" src="/noimage.png">
+                                            <% } else {%>
+                                                <img class="product__image" id="noimage" src="/product_images/<%= product._id %>/<%= product.image %>">
+                                            <% }%>
+                                        <div class="product__price"><%= product.price %> P</div>
+                                        <div class="product__name"><%= product.title %></div>
+                                        <div class="product__buttons">
+                                            <a href="/cart/add/<%= product._id %>" class="product__button cart">В корзину</a>
+                                            <a href="" class="product__button favorites"></a>
+                                        </div>
                                     </div>
-                                </div>
-                            <% }); %>
+                                <% }); %>
+                            <%};%>
  
                         </div>
                     </section>

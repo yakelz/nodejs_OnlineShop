@@ -561,7 +561,6 @@ button {
 .products__items {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     gap: 30px;
     margin-bottom: 100px;
 }
@@ -623,6 +622,11 @@ button {
 }
 .product__button.favorites:hover {
     opacity: 0.6;
+}
+
+.no-products {
+    margin:auto;
+
 }
 
 @media (max-width: 1431px) {

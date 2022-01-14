@@ -1,6 +1,7 @@
 const {secretKey} = require('config')
 const User = require('../models/User');
 const Role = require('../models/Role');
+const Cart = require('../models/Cart');
 const bcrypt = require ('bcryptjs');
 const { validationResult } = require("express-validator");
 const jwt = require('jsonwebtoken');
@@ -33,6 +34,10 @@ class userController {
             const userRole = await Role.findOne({value:"USER"});
             const user = new User ({username, email,password: hashPassword, roles:[userRole.value]});
             await user.save();
+
+            const cart = new Cart({userId: user._id})
+            await cart.save();
+
             return res.status(200).json({message: 'Регистрация прошла успешно!'});
         } catch (e) {
             console.log(e);

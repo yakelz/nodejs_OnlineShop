@@ -1,0 +1,41 @@
+<!-- Cart Item-->
+<% products.forEach(function(product){ %>
+    <div class="cart-item d-md-flex justify-content-between"><span class="remove-item"><a href="/cart/delete/<%= product._id %>" class="fa fa-times"></a></span>
+        <div class="px-3 my-3">
+            <a class="cart-item-product" href="/">
+                <% if (product.image == "") { %>
+                    <div class="cart-item-product-thumb">
+                        <img id="noimage" src="/noimage.png" alt="noimage">
+                    </div>
+                <% } else {%>
+                    <div class="cart-item-product-thumb">
+                        <img src="/product_images/<%= product._id %>/<%= product.image %>" alt="Product">
+                    </div>
+                <% }%>
+                <div class="cart-item-product-info">
+                    <h4 class="cart-item-product-title"><%= product.title %></h4>
+                    <span><strong>Категория: </strong><%= product.category.toUpperCase() %></span>
+                </div>
+            </a>
+        </div>
+        <div class="px-3 my-3 text-center">
+            <div class="cart-item-label">Кол-во</div>
+            <div class="count-input">
+                <select class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                </select>
+            </div>
+        </div>
+        <div class="px-3 my-3 text-center">
+            <div class="cart-item-label">Стоимость</div><span class="text-xl font-weight-medium"><%= product.price %> Р</span>
+        </div>
+        <div class="px-3 my-3 text-center">
+            <div class="cart-item-label">Скидка</div><span class="text-xl font-weight-medium">-</span>
+        </div>
+    </div>
+<% }); %>

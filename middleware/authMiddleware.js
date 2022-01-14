@@ -16,7 +16,6 @@ module.exports = function (req, res, next) {
         }
         // console.log('after if')
         const decodedData = jwt.verify(token, secretKey);
-        console.log(decodedData)
         // req.user = decodedData;
         req.session.user = decodedData;
         next();
