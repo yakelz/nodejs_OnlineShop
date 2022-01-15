@@ -3,33 +3,50 @@ const Product = require("../models/Product");
 class cartController {
     async cart_get (req, res) {
         Cart.findOne({userId:req.session.user.id},function (error,cart) {
+            console.log('cart items:')
+            console.log(cart.items);
             try {
-                console.log(cart.products);
                 res.render('../views/cart/cart',{
-                    products: cart.products,
+                    products: cart.items
                 });
             }catch (e) {
                 console.log(e);
             }
-        });
+        }).populate('items.productId');
     }
     async product_add_get (req, res) {
         try {
-            Cart.findOne({userId:req.session.user.id}, function (error, cart) {
-                let equal = false;
-                cart.products.forEach(product => {
-                    if (product._id == req.params.id) {
-                        equal = true;
+            Cart.findOne({userId:req.session.user.id},function (error,cart) {
+                const productId = req.params.id;
+                Product.findById(productId, function (error,product){
+                    //вернет индекс продукта в корзине (если такой продукт уже был добавлен)
+                    //если не находит, вернет -1
+
+                    const cartProductIndex = cart.items.findIndex(function (cartProduct){
+                        return cartProduct.productId.toString() === product._id.toString();
+                    });
+                    let newQuantity = 1;
+                    let updateCartItems = [...cart.items];
+
+                    console.log('UpdateCartItems:')
+                    console.log(updateCartItems);
+
+                    if (cartProductIndex >=0) {
+                        newQuantity = cart.items[cartProductIndex].quantity + 1;
+                        updateCartItems[cartProductIndex].quantity = newQuantity;
                     }
-                });
-                if (equal) {
-                    return res.status(400).json({message: "Повтор"});
-                }
-                console.log('after if');
-                Product.findById(req.params.id, function (error,product) {
-                    cart.products.push(product);
+                    else {
+                        updateCartItems.push({
+                            productId: product._id,
+                            quantity: newQuantity,
+                        })
+                    }
+                    console.log('!UpdateCartItems:')
+                    console.log(updateCartItems);
+
+                    cart.items = updateCartItems;
                     cart.save();
-                    return res.status(200).json({message: "Продукт добавлен в корзину"});
+                    return res.status(200).json({message:"Продукт добавлен в корзину"});
                 });
             });
         }
