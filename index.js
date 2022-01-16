@@ -10,7 +10,7 @@ const favicon = require('serve-favicon');
 const messages = require('express-messages');
 
 const MongoDBStore = require('connect-mongodb-session')(session);
-const PORT = config.get('port') || 5000;
+const PORT = config.get('port') || process.env.PORT;
 const indexRouter = require('./routes/index');
 
 const app = express();
