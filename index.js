@@ -6,6 +6,7 @@ const flash = require('connect-flash');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
+const favicon = require('serve-favicon');
 const messages = require('express-messages');
 
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -34,14 +35,12 @@ app.use(session({
   store: new MongoDBStore({ uri: config.get('mongoURL'), collection: 'sessions' })
 }));
 
-//Express Messages middleware
-app.use(flash());
-app.use(function (req, res, next) {
-  res.locals.messages = messages(req, res);
-  next();
-});
+//ico
+app.use(favicon(path.join(__dirname, 'public','favicon.ico')));
 
-app.use(express.json());
+//messages
+app.use(flash());
+
 app.use(express.static('public'));
 app.use('/', indexRouter);
 

@@ -45,7 +45,6 @@ class userController {
         }
     }
     async login_get (req,res) {
-        console.log(req.session);
         res.render ('../views/user/auth');
     }
     async login_post (req, res) {
@@ -66,7 +65,6 @@ class userController {
             if (user.roles.includes('ADMIN')) {
                 req.session.isAdmin = true;
             }
-            console.log(req.session)
             return res.status(200).json({token});
 
         } catch (e) {

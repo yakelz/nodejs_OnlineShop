@@ -1,16 +1,15 @@
-<% Object.keys(messages).forEach(function (type) { %>
-    <div class="alert alert-<%= type %>">
-        <% messages[type].forEach(function (message) { %>
-            <%= message %>
-        <% }) %>
-        <button type="button" name="close" onclick="close_alert()"></button>
+<% if (message) {%>
+    <div class="alert success-alert">
+        <h3><%=message%></h3>
+        <a class="close">&times;</a>
     </div>
-<% }) %>
+<%}%>
 
 <% if (errors) {%>
     <% errors.forEach(function(error) { %>
-        <div class="alert alert-danger">
-            <%= error.msg %>
-        </div>
+            <div class="alert danger-alert">
+                <h3><%= error.msg %></h3>
+                <a class="close">&times;</a>
+            </div>
     <% });%>
 <% }%>

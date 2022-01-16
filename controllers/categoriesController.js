@@ -6,13 +6,32 @@ const fs = require("fs-extra");
 
 class categoriesController {
     async categories_get (req,res) {
+        //express validator messages
+        let errors;
+        if (req.session.errors){
+            errors = req.session.errors.errors;
+        }
+        req.session.errors = null
+
+        //flash messages
+        let message = req.flash('message');
+        if (message.length > 0) {
+            message = message[0];
+        }
+        else {
+            message = null;
+        }
+
         Category.find(function (error, categories) {
             User.findById(req.session.user.id, function (error, user) {
                 res.render('../views/admin/admin_categories', {
+                    errors: errors,
                     categories: categories,
+                    search: '',
                     admin_name: user.username,
                     admin_email: user.email,
                     edit: false,
+                    message: message,
                 });
             });
         });
@@ -21,9 +40,9 @@ class categoriesController {
         try {
             const errors = validationResult(req);
             if(!errors.isEmpty()) {
-                return res.status(400).json({message: 'Ошибка при добавлении категории',errors});
+                req.session.errors = errors;
+                return res.status(400).redirect('/admin/categories/');
             }
-            console.log(req.body);
             const title = req.body.title;
             const category = new Category({
                 title: title,
@@ -32,23 +51,44 @@ class categoriesController {
             await category.save (function() {
 
             })
-            return res.status(200).json({message: 'Категория добавлена'});
+            req.flash('message', 'Категория добавлена');
+            return res.status(200).redirect('/admin/categories/');
         }
         catch (e) {
             console.log(e);
-            return res.status(404).json({message: 'Ошибка при добавлении категории (catch)'});
+            req.flash('message', 'Ошибка при добавлении категории (catch)');
+            return res.status(404).redirect('/admin/categories/');
         }
     }
     async edit_get (req,res) {
+        //express validator messages
+        let errors;
+        if (req.session.errors){
+            errors = req.session.errors.errors;
+        }
+        req.session.errors = null
+
+        //flash messages
+        let message = req.flash('message');
+        if (message.length > 0) {
+            message = message[0];
+        }
+        else {
+            message = null;
+        }
+
         Category.find(function (error, categories) {
             Category.findById(req.params.id, function (error, category) {
                 User.findById(req.session.user.id, function (error, user) {
                     res.render('../views/admin/admin_categories', {
+                        errors: errors,
                         categories: categories,
                         category: category,
+                        search: '',
                         admin_name: user.username,
                         admin_email: user.email,
                         edit:true,
+                        message: message,
                     });
                 });
             });
@@ -58,9 +98,9 @@ class categoriesController {
         try {
             const errors = validationResult(req);
             if(!errors.isEmpty()) {
-                return res.status(400).json({message: 'Ошибка при изменении категории',errors});
+                req.session.errors = errors;
+                return res.status(400).redirect('/admin/categories/');
             }
-            console.log(req.body);
 
             const title = req.body.title;
 
@@ -69,19 +109,20 @@ class categoriesController {
                 category.link = title.toLowerCase();
                 category.save();
             });
-
-            return res.status(200).json({message: 'Категория изменена'});
+            req.flash('message', 'Категория изменена');
+            return res.status(200).redirect('/admin/categories/');
         }
         catch (e) {
             console.log(e);
-            return res.status(404).json({message: 'Ошибка при изменении категории (catch)'});
+            req.flash('message', 'Ошибка при изменении категории (catch)');
+            return res.status(404).redirect('/admin/categories/');
         }
     }
     async delete_get (req,res) {
         try {
             const id = req.params.id;
             await Category.findByIdAndRemove(id);
-            //here notice about deleting
+            req.flash('message', 'Категория удалена');
             res.redirect('/admin/categories');
         } catch (e) {
             console.log(e);

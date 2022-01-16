@@ -22,7 +22,7 @@
                 <select name="category">
                     <% categories.forEach(function(category){ %>
                         <option value="<%= category.link %>"
-                            <% if (category.link == product.category) { %>
+                            <% if (category.link == product.category.link) { %>
                                 selected="selected" <% } %>
                         ><%= category.title %></option>
                     <% }); %>

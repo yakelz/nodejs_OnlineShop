@@ -7,14 +7,15 @@ const Product = new Schema({
         required: true
     },
     link: {
-        type: String
+        type: String,
     },
     description: {
         type: String,
         required: true
     },
     category: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
         required: true
     },
     price: {
@@ -26,5 +27,15 @@ const Product = new Schema({
     }
 
 });
+
+const autoPopulateCategory = function(next) {
+    this.populate('category');
+    next();
+};
+
+Product
+    .pre('findOne', autoPopulateCategory)
+    .pre('find', autoPopulateCategory);
+
 
 module.exports = model ('Product', Product)

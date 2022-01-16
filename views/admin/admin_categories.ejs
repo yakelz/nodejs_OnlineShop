@@ -7,6 +7,7 @@
     <!-- main font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/alert/css/alert.css">
     <title>AdminPanel</title>
 </head>
 
@@ -28,6 +29,8 @@
                 <h1>Список категорий</h1>
                 <button id="myBtn" class="add__product-button">Добавить категорию</button>
 
+                <%- include ("../partials/flash_messages.ejs")  %>
+
                 <%- include ("../partials/categories_create_modal.ejs")  %>
 
                 <%- include ("../partials/categories_list.ejs")  %>
@@ -42,6 +45,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/admin/js/modal.js"></script>
+<script src="/alert/js/alert.js"></script>
 
 </body>
 

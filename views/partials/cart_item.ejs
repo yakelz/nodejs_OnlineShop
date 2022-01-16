@@ -1,5 +1,6 @@
 <!-- Cart Item-->
 <% products.forEach(function(product){ %>
+    <%if(product ) {%>
     <div class="cart-item d-md-flex justify-content-between"><span class="remove-item"><a href="/cart/delete/<%= product.productId._id %>" class="fa fa-times"></a></span>
         <div class="px-3 my-3">
             <a class="cart-item-product" href="/">
@@ -14,22 +15,18 @@
                 <% }%>
                 <div class="cart-item-product-info">
                     <h4 class="cart-item-product-title"><%= product.productId.title %></h4>
-                    <span><strong>Категория: </strong><%= product.productId.category.toUpperCase() %></span>
+                    <span><strong>Категория: </strong><%= product.productId.category.title.toUpperCase() %></span>
                 </div>
             </a>
         </div>
         <div class="px-3 my-3 text-center">
             <div class="cart-item-label">Кол-во</div>
             <div class="count-input">
-                <h4 class="cart-item-product-title"><%= product.quantity %></h4>
-<!--                <select class="form-control">-->
-<!--                    <option>1</option>-->
-<!--                    <option>2</option>-->
-<!--                    <option>3</option>-->
-<!--                    <option>4</option>-->
-<!--                    <option>5</option>-->
-<!--                    <option>6</option>-->
-<!--                </select>-->
+                <h4 class="cart-item-product-title">
+                    <a class="btn btn-light" href="/cart/update/<%= product.productId._id %>?action=remove">-</a>
+                    <%= product.quantity %>
+                    <a class="btn btn-light" href="/cart/update/<%= product.productId._id %>?action=add">+</a>
+                </h4>
             </div>
         </div>
         <div class="px-3 my-3 text-center">
@@ -39,4 +36,5 @@
             <div class="cart-item-label">Скидка</div><span class="text-xl font-weight-medium">-</span>
         </div>
     </div>
+<% };%>
 <% }); %>

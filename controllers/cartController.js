@@ -3,16 +3,19 @@ const Product = require("../models/Product");
 class cartController {
     async cart_get (req, res) {
         Cart.findOne({userId:req.session.user.id},function (error,cart) {
-            console.log('cart items:')
-            console.log(cart.items);
+            let total = 0;
+            cart.items.forEach(function (item) {
+                total = total + item.quantity * item.productId.price;
+            });
             try {
                 res.render('../views/cart/cart',{
-                    products: cart.items
+                    products: cart.items,
+                    total: total,
                 });
             }catch (e) {
                 console.log(e);
             }
-        }).populate('items.productId');
+        }).populate('items.productId')
     }
     async product_add_get (req, res) {
         try {
@@ -28,9 +31,6 @@ class cartController {
                     let newQuantity = 1;
                     let updateCartItems = [...cart.items];
 
-                    console.log('UpdateCartItems:')
-                    console.log(updateCartItems);
-
                     if (cartProductIndex >=0) {
                         newQuantity = cart.items[cartProductIndex].quantity + 1;
                         updateCartItems[cartProductIndex].quantity = newQuantity;
@@ -41,12 +41,11 @@ class cartController {
                             quantity: newQuantity,
                         })
                     }
-                    console.log('!UpdateCartItems:')
-                    console.log(updateCartItems);
 
                     cart.items = updateCartItems;
                     cart.save();
-                    return res.status(200).json({message:"Продукт добавлен в корзину"});
+                    req.flash('message','Продукт добавлен в корзину')
+                    res.status(200).redirect('/');
                 });
             });
         }
@@ -55,13 +54,71 @@ class cartController {
         }
     }
     async product_delete_get (req, res) {
-        Cart.findOne({userId:req.session.user.id}, function (error, cart) {
-            Product.findOne({_id:req.params.id}, function (error,product) {
-                cart.products.remove(product);
+        try {
+            Cart.findOne({userId:req.session.user.id}, function (error, cart) {
+                Product.findOne({_id:req.params.id}, function (error,product) {
+                    const updatedCartItems = cart.items.filter((i) => {
+                        return i.productId.toString() !== product._id.toString();
+                    });
+                    cart.items = updatedCartItems;
+                    cart.save();
+                    res.redirect('/cart');
+                });
+            });
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    async update_get (req,res) {
+        let action = req.query.action;
+        try {
+            Cart.findOne({userId:req.session.user.id}, function (error, cart) {
+                Product.findOne({_id:req.params.id}, function (error, product) {
+                    cart.items.filter((i) => {
+                        if (i.productId.toString() == product._id.toString()) {
+                            switch (action) {
+                                case "add":
+                                    i.quantity++;
+                                    break;
+                                case "remove":
+                                    if (i.quantity > 1) {
+                                        i.quantity--;
+                                    } else {
+                                        const updatedCartItems = cart.items.filter((i) => {
+                                            return i.productId.toString() !== product._id.toString();
+                                        });
+                                        cart.items = updatedCartItems;
+                                    }
+                                    break;
+                                default:
+                                    console.log('Update error');
+                                    break;
+                            }
+                        };
+                    });
+                    cart.save();
+                    res.redirect('/cart');
+                });
+            });
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    async clear_get (req,res) {
+        try {
+            Cart.findOne({userId:req.session.user.id}, function (error, cart) {
+                cart.items = [];
                 cart.save();
                 res.redirect('/cart');
             });
-        });
+        }
+        catch (e) {
+            console.log(e);
+        }
     }
 }
 
