@@ -1,5 +1,5 @@
 {
-    "port":5000,
+    "port":80,
     "mongoURL": "mongodb+srv://yakel:mongodb@cluster0.j8xqj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     "secretKey": "my_secret_key"
 }
